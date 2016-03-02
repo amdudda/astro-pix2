@@ -36,7 +36,6 @@ function apodRequest(res, today) {
 
   var queryParam = {};
   var APIKEY = process.env.APOD_API_KEY;
-  console.log("key is: " + APIKEY);
 
   if (today) {
     queryParam = { 'api_key' : APIKEY };
