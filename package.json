@@ -14,5 +14,9 @@
     "morgan": "~1.6.1",
     "request": "^2.69.0",
     "serve-favicon": "~2.3.0"
+  },
+  "engines":{
+    "node":"4.2.2",
+    "npm":"1.4.21"
   }
 }
