@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+// TODO this needs to be revamped to make use of MongoDB data
+
 /* GET favorites listing. */
 router.get('/', function(req, res, next) {
 
