@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 //var bodyParser = require('body-parser');
 
+var passport = require('passport');
+var User = require('../models/user');
+
 var request = require('request');
 var moment = require('moment');
 
@@ -133,5 +136,18 @@ function randomDateString(){
   return stringRandomDate;
 }
 
+
+/* GET logout */
+router.get('/logout', function (req, res, next) {
+  req.logout();  // passport middleware adds this to req.
+  res.redirect('/');  // then send user back to homepage.
+});
+
+router.get('/auth/twitter', passport.authenticate('twitter'));
+
+router.get('/auth/twitter/callback', passport.authenticate('twitter', {
+  successRedirect: '/favorites',
+  failureRedirect: '/'
+}));
 
 module.exports = router;

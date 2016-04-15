@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models.user');
+var passport = require('passport');
+var User = require('../models/user');
 
 // TODO this needs to be revamped to make use of MongoDB data
 
@@ -9,12 +10,12 @@ router.get('/', isLoggedIn, function (req, res, next) {
 
     // TODO if user logged in, send to favorites page, else redirect to login via Twitter.
     var myUser = req.user;
-    console.log(myUser);
+    console.log(JSON.stringify(myUser));
     if (myUser.favorites === undefined) {
         myUser.favorites = [];
     }
 
-    console.log(myUser.favorites);
+    console.log("attempting to render favorites");
     res.render('favorites', myUser.favorites);
 });
 
@@ -51,17 +52,6 @@ function isLoggedIn(req, res, next) {
 }
 
 
-/* GET logout */
-router.get('/logout', function (req, res, next) {
-    req.logout();  // passport middleware adds this to req.
-    res.redirect('/');  // then send user back to homepage.
-});
 
-router.get('/auth/twitter', passport.authenticate('twitter'));
-
-router.get('/auth/twitter/callback', passport.authenticate('twitter', {
-    successRedirect: '/favorites',
-    failureRedirect: '/'
-}));
 
 module.exports = router;
