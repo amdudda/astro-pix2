@@ -3,12 +3,10 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
 
-// TODO this needs to be revamped to make use of MongoDB data
-
 /* GET favorites listing. */
 router.get('/', isLoggedIn, function (req, res, next) {
 
-    // TODO if user logged in, send to favorites page, else redirect to login via Twitter.
+    // if user logged in, send to favorites page, else redirect to login via Twitter.
     var myUser = req.user;
     //console.log(JSON.stringify(myUser));
     if (myUser.favorites === undefined) {
@@ -22,7 +20,7 @@ router.get('/', isLoggedIn, function (req, res, next) {
 
 router.post('/add', isLoggedIn, function (req, res, next) {
 
-    // TODO if user logged in, add favorite & send to favorites page, else redirect to login via Twitter.
+    // if user logged in, add favorite & send to favorites page, else redirect to login via Twitter.
     /*console.log("at router.post(add)");
     console.log(req);
     console.log(JSON.stringify(req.user));*/
@@ -36,11 +34,31 @@ router.post('/add', isLoggedIn, function (req, res, next) {
     myUser.favorites.push(req.body);
 
     myUser.save(function(err){
-        if (err) res.render('favorites', {error: err});
+        if (err) res.render('favorites', {error: err, msg: 'Error saving favorite'});
         res.redirect('/favorites');  //favorites page
     });
 
 
+});
+
+router.post('/delfave', isLoggedIn, function(req,res,next) {
+    // TODO this deletes a favorite from a user's list of faves based on the Url passed to here
+    console.log("deleting... " + req.body.favUrl);
+    var myUser = req.user;
+    var userFavs = myUser.favorites;
+    var favUrl = req.body.favUrl;
+
+    // find the favorite to be delete it, and remove it from the array of faves.
+    for (var f = 0; f<userFavs.length; f++) {
+        console.log(userFavs[f].url);
+        if (userFavs[f].url = favUrl) userFavs.splice(f, 1);
+    }
+
+    // save the changed data.
+    myUser.save(function (err) {
+        if (err) res.render('favorites', {error: err, msg: "Error deleting favorite."});
+        res.redirect('/favorites');
+    });
 });
 
 /*
