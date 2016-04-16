@@ -10,22 +10,22 @@ router.get('/', isLoggedIn, function (req, res, next) {
 
     // TODO if user logged in, send to favorites page, else redirect to login via Twitter.
     var myUser = req.user;
-    console.log(JSON.stringify(myUser));
+    //console.log(JSON.stringify(myUser));
     if (myUser.favorites === undefined) {
         myUser.favorites = [];
     }
 
-    console.log("attempting to render favorites");
-    res.render('favorites', myUser.favorites);
+    //console.log("attempting to render favorites");
+    res.render('favorites', myUser);
 });
 
 
 router.post('/add', isLoggedIn, function (req, res, next) {
 
-    // TODO if user logged in, add & send to favorites page, else redirect to login via Twitter.
-    console.log("at router.post(add)");
+    // TODO if user logged in, add favorite & send to favorites page, else redirect to login via Twitter.
+    /*console.log("at router.post(add)");
     console.log(req);
-    console.log(req.user);
+    console.log(JSON.stringify(req.user));*/
     console.log(req.body);
 
     var myUser = req.user;
@@ -35,7 +35,11 @@ router.post('/add', isLoggedIn, function (req, res, next) {
 
     myUser.favorites.push(req.body);
 
-    res.redirect('/favorites');  //favorites page
+    myUser.save(function(err){
+        if (err) res.render('favorites', {error: err});
+        res.redirect('/favorites');  //favorites page
+    });
+
 
 });
 
