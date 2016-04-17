@@ -2,7 +2,8 @@ extends layout
 
 block content
 
-    h1 Favorites
+    h1 Favorites for user&nbsp;
+        span(style="font-style:italic") #{twitter.displayName}
 
     if error
         p #{msg}

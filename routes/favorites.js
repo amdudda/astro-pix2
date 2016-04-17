@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
+var bodyParser = require('body-parser');
 
 /* GET favorites listing. */
 router.get('/', isLoggedIn, function (req, res, next) {
@@ -74,6 +75,40 @@ function isLoggedIn(req, res, next) {
 }
 
 
+/* work with route parameters to provide task objects */
+router.param("user_id", function(req, res, next, userId) {
+
+    console.log("params being extracted from URL for " + userId);
+
+    User.findOne({ "twitter.username" : userId}, function(err,user) {
+        if (err) {
+            res.render("favorites", { msg: "unable to find user", "error": error});
+        }
+        req.user = user;
+        return next();
+    });
+});
+
+// show a user's favorites by POSTing to /favorites/user_id
+// set completed value associated with task id to true
+router.get("/:user_id", function(req, res, next) {
+
+    //console.log(JSON.stringify(req.user));
+    //console.log(req.user._id);
+    /*if (!req.body.completed) {
+        return next(new Error("body missing parameter?"));
+    }*/
+
+    User.findById(req.user._id,
+        function(error, user) {
+            if (error) {
+                //return next(error);
+                res.render("favorites", { msg: "unable to find user", "error": error});
+            }
+            //console.log(user._id);
+            res.render("favorites", user);
+        });
+});
 
 
 module.exports = router;
