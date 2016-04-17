@@ -135,6 +135,13 @@ function randomDateString(){
   return stringRandomDate;
 }
 
+/* GET a user's list of favorites */
+router.get('/showfaves', function(req, res, next) {
+  // TODO redirect to user's page
+  var username = req.query.pickuser;
+  res.redirect('/favorites/' + username);
+
+});
 
 /* GET logout */
 router.get('/logout', function (req, res, next) {

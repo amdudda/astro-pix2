@@ -10,9 +10,9 @@ block buttons
             input.btn.btn-info.btn-lg.btn-block#random(name='random' value="Random Picture" type='submit')
 
         form.my_favorites(method="get" action="favorites")
-            input.btn.btn-primary.btn-lg.btn-block#myfavorites(name='favorites' value="My Favorite Pictures" type='submit')
+            input.btn.btn-primary.btn-lg.btn-block#myfavorites(name='favorites' value="View Or Edit My Favorite Pictures" type='submit')
 
-        form.get_favorites(method="get" action="showfaves")
+        form.get_favorites(method="get" action="/showfaves")
             input.btn.btn-primary.btn-lg#userfavorites(name='userfavorites' value="Find Favorite Pictures for User:" type='submit')
             span
                 input#pickuser(name="pickuser" type=text)
