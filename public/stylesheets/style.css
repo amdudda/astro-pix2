@@ -40,3 +40,19 @@ all on one line */
 .favitem {
   padding: 20px 0 20px 0
 }
+
+table {
+  width: 100%;
+}
+
+td {
+  padding:2px;
+}
+
+#userfavorites {
+  width:75%;
+}
+
+#pickuser {
+  width:25%
+}

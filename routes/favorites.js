@@ -93,12 +93,6 @@ router.param("user_id", function(req, res, next, userId) {
 // set completed value associated with task id to true
 router.get("/:user_id", function(req, res, next) {
 
-    //console.log(JSON.stringify(req.user));
-    //console.log(req.user._id);
-    /*if (!req.body.completed) {
-        return next(new Error("body missing parameter?"));
-    }*/
-
     User.findById(req.user._id,
         function(error, user) {
             if (error) {
