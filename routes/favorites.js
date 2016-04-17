@@ -46,13 +46,17 @@ router.post('/delfave', isLoggedIn, function(req,res,next) {
     // TODO this deletes a favorite from a user's list of faves based on the Url passed to here
     console.log("deleting... " + req.body.favUrl);
     var myUser = req.user;
-    var userFavs = myUser.favorites;
+    //var userFavs = myUser.favorites;
     var favUrl = req.body.favUrl;
 
     // find the favorite to be delete it, and remove it from the array of faves.
-    for (var f = 0; f<userFavs.length; f++) {
-        console.log(userFavs[f].url);
-        if (userFavs[f].url = favUrl) userFavs.splice(f, 1);
+    for (var f = 0; f<myUser.favorites.length; f++) {
+        console.log(myUser.favorites[f].url);
+        if (myUser.favorites[f].url == favUrl) {
+            myUser.favorites.splice(f, 1);
+            break;
+        }
+
     }
 
     // save the changed data.

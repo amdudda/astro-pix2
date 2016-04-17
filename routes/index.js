@@ -145,6 +145,7 @@ router.get('/showfaves', function(req, res, next) {
 
 /* GET logout */
 router.get('/logout', function (req, res, next) {
+  console.log("logging out");
   req.logout();  // passport middleware adds this to req.
   res.redirect('/');  // then send user back to homepage.
 });
