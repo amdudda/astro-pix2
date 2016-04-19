@@ -1,5 +1,6 @@
 /*
  * copypasta from https://raw.githubusercontent.com/minneapolis-edu/simple-auth-fav-color/master/config/passport.js
+ *  I've left the local authentication in place in case I decide to implement that.
  */
 
 var LocalStrategy = require('passport-local').Strategy;

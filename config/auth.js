@@ -1,4 +1,4 @@
-// TODO SET ENV VARS
+// this stores authentication data for my application
 
 module.exports = {
 	'twitterAuth' : {
