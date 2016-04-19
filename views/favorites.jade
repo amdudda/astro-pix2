@@ -19,7 +19,8 @@ block content
                     p.favtitle #{fav.title}
                     p.favdate #{fav.date}
                     input(type="hidden" value="#{fav.url}" name="favUrl")
-                    button(id="button_#{i}" value="a delete button") Delete this favorite
+                    if (!guestview)
+                        button(id="button_#{i}" value="a delete button") Delete this favorite
                 - i++
     else
         p No favorites saved yet.

@@ -104,6 +104,7 @@ router.get("/:user_id", function(req, res, next) {
                 res.render("favorites", { msg: "unable to find user", "error": error});
             }
             //console.log(user._id);
+            user.guestview = true;
             res.render("favorites", user);
         });
 });
