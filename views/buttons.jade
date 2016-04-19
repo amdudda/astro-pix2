@@ -9,7 +9,7 @@ block buttons
             input.btn.btn-info.btn-lg.btn-block#today(name='today' value="Today's Picture" type='submit')
             input.btn.btn-info.btn-lg.btn-block#random(name='random' value="Random Picture" type='submit')
 
-        form.my_favorites(method="get" action="favorites")
+        form.my_favorites(method="get" action="/favorites")
             input.btn.btn-primary.btn-lg.btn-block#myfavorites(name='favorites' value="View Or Edit My Favorite Pictures" type='submit')
 
         form.get_favorites(method="get" action="/showfaves")
@@ -20,5 +20,5 @@ block buttons
         form.finduser(method="get" action="/")
             input.btn.btn-info.btn-lg.btn-block#homepage(name="homepage" value="Home Page" type='submit')
 
-        form.logout(method="get" action="logout")
+        form.logout(method="get" action="/logout")
             input.btn.btn-info.btn-lg.btn-block#logout(name="logout" value="Log Out" type='submit')
