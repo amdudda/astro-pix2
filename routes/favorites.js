@@ -31,8 +31,17 @@ router.post('/add', isLoggedIn, function (req, res, next) {
     if (myUser.favorites === undefined) {
         myUser.favorites = [];
     }
+    var found = false;
+    for (var i = 0; i<myUser.favorites.length; i++) {
+        var curFave = myUser.favorites[i];
+        if (req.body.url == curFave.url) {
+            found = true;
+            break;  // we found a match - break out of loop.
+        }
+    }
 
-    myUser.favorites.push(req.body);
+    if (!found)
+        myUser.favorites.push(req.body);  // only add favorite if it isn't already in the list
 
     myUser.save(function(err){
         if (err) res.render('favorites', {error: err, msg: 'Error saving favorite'});
