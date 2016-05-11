@@ -106,15 +106,19 @@ router.param("user_id", function(req, res, next, userId) {
 // set completed value associated with task id to true
 router.get("/:user_id", function(req, res, next) {
 
-    User.findById(req.user._id,
+    User.findById(req.user_id,
         function(error, user) {
             if (error) {
-                //return next(error);
-                res.render("favorites", { msg: "unable to find user", "error": error});
+              //This will happen if DB error, for example, connection lost
+              return next(err);
+            }
+            if (!user) {
+              //This is where you want to handle user not found
+              return res.render("favorites", { msg: "unable to find user", "error": error});
             }
             //console.log(user._id);
-            user.guestview = true;
-            res.render("favorites", user);
+            user.guestview = true;    //To be implemented?
+            return res.render("favorites", user);
         });
 });
 
